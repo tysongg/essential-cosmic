@@ -1,7 +1,7 @@
 from aiohttp import web
 
 @web.middleware
-async def topic_or_404(request: web.Request, handler: web.RequestHandler) -> web.Response:
+async def topic_or_404(request: web.Request, handler) -> web.Response:
     
     topic_id = request.match_info.get('topic_id', None)
 

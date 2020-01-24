@@ -21,3 +21,4 @@ Figure out how to customize error responses sent from HTTP Exceptions raised by 
 Figure out if it's possible to associate a middleware with specefic routes rather than the entire application
 Implement marshmello or some other libray to help create json representations of models
 Define typing so we can reference types without triggering circular imports
+Pull in differnt typings from aiohttp so we can properly typehint web.RequestHandler params (middleware)
