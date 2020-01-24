@@ -1,0 +1,2 @@
+class TopicExistsError(Exception):
+    pass
