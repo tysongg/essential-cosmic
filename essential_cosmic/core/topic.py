@@ -20,6 +20,10 @@ class Topic:
         self._messages = []
         self._next_index = 0
     
+    @property
+    def count(self) -> int:
+        return self._next_index
+    
     def new_message(self, value: Text) -> Message:
 
         message = Message(self._next_index, value, topic=self)
@@ -49,7 +53,7 @@ class Topic:
         return self._messages[o:c]
 
     def as_json(self) -> Dict:
-        return {"title": self.title, "id": str(self.id)}
+        return {"title": self.title, "id": str(self.id), "message_count": self.count}
 
     @staticmethod
     def generate_id() -> Text:

@@ -41,6 +41,7 @@ def test_as_json(topic):
     assert topic_json == {
         "id": topic.id,
         "title": topic.title,
+        "message_count": topic.count
     }
 
 def test_generate_id():
