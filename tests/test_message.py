@@ -11,37 +11,34 @@ from essential_cosmic.core.topic import Topic
 from essential_cosmic.core.manager import TopicManager
 
 
-@pytest.fixture()
-def topic():
-    manager = TopicManager()
-    topic = Topic("Test Topic", manager=manager)
+class TestMessage:
+    @pytest.fixture()
+    def topic(self):
+        manager = TopicManager()
+        topic = Topic("Test Topic", manager=manager)
 
-    return topic
+        return topic
 
+    @pytest.fixture()
+    def message(self, topic):
 
-@pytest.fixture()
-def message(topic):
+        message = Message(offset=0, value="Test Message", topic=topic)
 
-    message = Message(offset=0, value="Test Message", topic=topic)
+        return message
 
-    return message
+    def test_as_json(self, message):
 
+        assert message.as_json() == {
+            "topic": message.topic.id,
+            "offset": message.offset,
+            "id": message.id,
+            "value": message.value,
+        }
 
-def test_as_json(message):
+    def test_generate_id(self):
 
-    assert message.as_json() == {
-        "topic": message.topic.id,
-        "offset": message.offset,
-        "id": message.id,
-        "value": message.value,
-    }
+        assert Message.generate_id() != Message.generate_id()
 
+    def test_str(self, message):
 
-def test_generate_id():
-
-    assert Message.generate_id() != Message.generate_id()
-
-
-def test_str(message):
-
-    assert str(message) == message.id
+        assert str(message) == message.id
