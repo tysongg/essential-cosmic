@@ -9,6 +9,8 @@ pytest = "*"
 aiohttp-devtools = "*"
 pytest-cov = "*"
 pytest-aiohttp = "*"
+pylint = "*"
+black = "~=19.10b"
 
 [packages]
 aiohttp = "*"
