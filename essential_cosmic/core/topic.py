@@ -42,13 +42,24 @@ class Topic:
         o: Optional[int]
         c: Optional[int]
 
+        o, c = self._parse_offset_and_count(offset, count)
+
+        return self._messages[o:c]
+
+    def _parse_offset_and_count(
+        offset: Optional[int] = None, count: Optional[int] = None
+    ) -> List[Optional[int]]:
+        o: Optional[int]
+        c: Optional[int]
+
         o = int(offset) if offset is not None else None
         o = 0 if o is not None and o < 0 else o
         if o is not None:
             if count is not None:
                 if count >= 0:
                     c = o + int(count)
-                else c = None
+                else:
+                    c = None
             else:
                 c = None
         elif count is not None:
@@ -59,7 +70,7 @@ class Topic:
         else:
             c = None
 
-        return self._messages[o:c]
+        return [o, c]
 
     def as_json(self) -> Dict:
         return {"title": self.title, "id": str(self.id), "message_count": self.count}
