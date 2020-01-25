@@ -43,13 +43,19 @@ class Topic:
         c: Optional[int]
 
         o = int(offset) if offset is not None else None
+        o = 0 if o is not None and o < 0 else o
         if o is not None:
             if count is not None:
-                c = o + int(count)
+                if count >= 0:
+                    c = o + int(count)
+                else c = None
             else:
                 c = None
         elif count is not None:
-            c = int(count)
+            if count >= 0:
+                c = int(count)
+            else:
+                c = None
         else:
             c = None
 
