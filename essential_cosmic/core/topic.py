@@ -47,7 +47,7 @@ class Topic:
         return self._messages[o:c]
 
     def _parse_offset_and_count(
-        offset: Optional[int] = None, count: Optional[int] = None
+        self, offset: Optional[int] = None, count: Optional[int] = None
     ) -> List[Optional[int]]:
         o: Optional[int]
         c: Optional[int]
@@ -56,14 +56,14 @@ class Topic:
         o = 0 if o is not None and o < 0 else o
         if o is not None:
             if count is not None:
-                if count >= 0:
+                if int(count) >= 0:
                     c = o + int(count)
                 else:
                     c = None
             else:
                 c = None
         elif count is not None:
-            if count >= 0:
+            if int(count) >= 0:
                 c = int(count)
             else:
                 c = None

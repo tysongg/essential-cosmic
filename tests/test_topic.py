@@ -36,6 +36,8 @@ class TestTopic:
         assert len(topic.get_messages(offset=1)) == 2
         assert len(topic.get_messages(count=2)) == 2
         assert len(topic.get_messages(offset=1, count=1)) == 1
+        assert len(topic.get_messages(offset=1, count=-1)) == 2
+        assert len(topic.get_messages(count=-1)) == 3
 
     def test_as_json(self, topic):
 
