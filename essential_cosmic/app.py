@@ -18,15 +18,15 @@ app.add_routes(producer.routes)
 
 # Sample data
 topic_manager = TopicManager()
-topic = topic_manager.new_topic('test_topic')
-topic.new_message("{\"Foo\": \"Bar\"}")
-topic.new_message("{\"Fizz\": \"Bizz\"}")
-topic.new_message("{\"Key\": \"Value\"}")
+topic = topic_manager.new_topic("test_topic")
+topic.new_message('{"Foo": "Bar"}')
+topic.new_message('{"Fizz": "Bizz"}')
+topic.new_message('{"Key": "Value"}')
 
-app['topic_manager'] = topic_manager
+app["topic_manager"] = topic_manager
 
-logger.info('Created app')
+logger.info("Created app")
 
-if __name__ == '__main__':
-    logger.info('Starting App')
+if __name__ == "__main__":
+    logger.info("Starting App")
     web.run_app(app)
