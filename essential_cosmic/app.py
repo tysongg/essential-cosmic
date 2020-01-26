@@ -4,9 +4,9 @@ from aiohttp import web
 
 from .apis import consumer
 from .apis import producer
+from .apis import websocket
 from .core.manager import TopicManager
-from .core.message import Message
-from .core.topic import Topic
+from .core.websocket import WebsocketManager
 from .middleware.topic import topic_or_404
 
 logging.basicConfig(level=logging.DEBUG)
@@ -19,9 +19,10 @@ def make_app():
     app = web.Application(middlewares=[topic_or_404])
     app.add_routes(consumer.routes)
     app.add_routes(producer.routes)
+    app.add_routes(websocket.routes)
 
     # Initalize Topic Manager
-    topic_manager = TopicManager()
+    topic_manager = TopicManager(WebsocketManager())
 
     app["topic_manager"] = topic_manager
 

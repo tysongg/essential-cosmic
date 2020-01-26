@@ -22,7 +22,7 @@ async def topic_create(request: web.Request) -> web.Response:
         return web.json_response({"message": "Title is a required input"}, status=400)
 
     try:
-        topic = request.app["topic_manager"].new_topic(topic_data["title"])
+        topic = await request.app["topic_manager"].new_topic(topic_data["title"])
     except (TopicExistsError):
         return web.json_response({"message": "Topic already exists"}, status=400)
 
@@ -42,6 +42,6 @@ async def message_create(request: web.Request) -> web.Response:
     if message_data.get("value", None) is None:
         return web.json_response({"message": "Value is a required input"}, status=400)
 
-    message = topic.new_message(message_data["value"])
+    message = await topic.new_message(message_data["value"])
 
     return web.json_response(message.as_json())

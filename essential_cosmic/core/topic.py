@@ -25,7 +25,7 @@ class Topic:
     def count(self) -> int:
         return self._next_index
 
-    def new_message(self, value: Text) -> Message:
+    async def new_message(self, value: Text) -> Message:
 
         message = Message(self._next_index, value, topic=self)
         self._next_index += 1
@@ -33,20 +33,22 @@ class Topic:
         self._messages.append(message)
         self.logger.debug("Added message %s to topic %s", message, self)
 
+        await self.manager.websocket_manager.new_message(message)
+
         return message
 
-    def get_messages(
+    async def get_messages(
         self, offset: Optional[int] = None, count: Optional[int] = None
     ) -> List[Message]:
 
         o: Optional[int]
         c: Optional[int]
 
-        o, c = self._parse_offset_and_count(offset, count)
+        o, c = await self._parse_offset_and_count(offset, count)
 
         return self._messages[o:c]
 
-    def _parse_offset_and_count(
+    async def _parse_offset_and_count(
         self, offset: Optional[int] = None, count: Optional[int] = None
     ) -> List[Optional[int]]:
         o: Optional[int]

@@ -22,3 +22,5 @@ Figure out if it's possible to associate a middleware with specefic routes rathe
 Implement marshmello or some other libray to help create json representations of models
 Define typing so we can reference types without triggering circular imports
 Pull in differnt typings from aiohttp so we can properly typehint web.RequestHandler params (middleware)
+Implement event system to decouple models from websocket implementation
+Handle WS connections that close unexpectadly.
