@@ -9,12 +9,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
 from essential_cosmic.core.message import Message
 from essential_cosmic.core.topic import Topic
 from essential_cosmic.core.manager import TopicManager
+from essential_cosmic.core.websocket import WebsocketManager
 
 
 class TestMessage:
     @pytest.fixture()
     def topic(self):
-        manager = TopicManager()
+        manager = TopicManager(WebsocketManager())
         topic = Topic("Test Topic", manager=manager)
 
         return topic

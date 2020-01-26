@@ -26,16 +26,8 @@ async def topic_details(request: web.Request) -> web.Response:
 @routes.get("/topic/{topic_id}/message")
 async def topic_message(request: web.Request) -> web.Response:
 
-    message_offset = request.query.get("offset", None)
-    message_count = request.query.get("count", None)
-    if not isinstance(message_offset, int) and message_offset is not None:
-        return web.json_response(
-            {"message": "Offset must be a positive integer"}, status=400
-        )
-    elif not isinstance(message_count, int) and message_count is not None:
-        return web.json_response(
-            {"message": "Count must be a positive integer"}, status=400
-        )
+    message_offset = _validate_count_or_offset(request.query.get("offset", None))
+    message_count = _validate_count_or_offset(request.query.get("count", None))
 
     topic = request["topic"]
 
@@ -45,3 +37,13 @@ async def topic_message(request: web.Request) -> web.Response:
             for message in await topic.get_messages(message_offset, message_count)
         ]
     )
+
+
+def _validate_count_or_offset(input):
+
+    try:
+        number = int(input)
+    except:
+        return None
+
+    return number
