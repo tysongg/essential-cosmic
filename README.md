@@ -26,3 +26,4 @@ Implement event system to decouple models from websocket implementation
 Handle WS connections that close unexpectadly.
 Implement tests for websockets
 Implement queueing in websocket manager so we don't block responses on POST calls to /topic/<id>/topic
+Fix mypy errors
