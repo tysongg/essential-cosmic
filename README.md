@@ -2,7 +2,7 @@
 Demonstration implemention of a kafka-like HTTP server.
 
 ## Setting up environment
-`pipenv --three`
+`pipenv sync --dev`
 
 To access the virtual environment run:
 `pipenv shell`

@@ -15,7 +15,7 @@ async def topic_create(request: web.Request) -> web.Response:
 
     try:
         topic_data = await request.json()
-    except (json.decoder.JSONDecodeError):
+    except (json.decoder.JSONDecodeError, web.HTTPBadRequest):
         return web.json_response({"message": "Invalid input"}, status=400)
 
     if topic_data.get("title", None) is None:
@@ -36,7 +36,7 @@ async def message_create(request: web.Request) -> web.Response:
 
     try:
         message_data = await request.json()
-    except (json.decoder.JSONDecodeError):
+    except (json.decoder.JSONDecodeError, web.HTTPBadRequest):
         return web.json_response({"message": "Invalid input"}, status=400)
 
     if message_data.get("value", None) is None:

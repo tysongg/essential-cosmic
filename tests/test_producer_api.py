@@ -10,7 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
 from essential_cosmic.app import make_app
 
 
-class TestConsumer:
+class TestProducer:
     @pytest.fixture(scope="function")
     async def cli(self, aiohttp_client):
         client = await aiohttp_client(make_app())
