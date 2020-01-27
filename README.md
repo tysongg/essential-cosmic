@@ -15,15 +15,3 @@ To access the virtual environment run:
 
 ## Check MYPY coverage
 `mypy essential_cosmic`
-
-## Notes / TODOs
-* Figure out how to customize error responses sent from HTTP Exceptions raised by handlers
-* Figure out if it's possible to associate a middleware with specefic routes rather than the entire application
-* Implement marshmello or some other libray to help create json representations of models
-* Define typing so we can reference types without triggering circular imports
-* Pull in differnt typings from aiohttp so we can properly typehint web.RequestHandler params (middleware)
-* Implement event system to decouple models from websocket implementation
-* Handle WS connections that close unexpectadly.
-* Implement tests for websockets
-* Implement queueing in websocket manager so we don't block responses on POST calls to /topic/<id>/topic
-* Fix mypy errors
